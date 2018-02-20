@@ -11,6 +11,7 @@ This code is mostly based on the code from [this tutorial](https://www.youtube.c
 - Separated into files, some docs, minor refactoring.
 - Added a more simple, straight-forward API.
 - Added support in tile prices, eg tiles that cost more to walk on.
+- Added support for Manhattan distance.
 
 But overall most of the work is done by [Sebastian Lague](https://www.youtube.com/channel/UCmtyQOKKmrMVaKuRXz02jbQ).
 
@@ -51,4 +52,15 @@ bool[,] tilesmap = new bool[width, height];
 PathFind.Grid grid = new PathFind.Grid(width, height, tilesmap);
 
 // rest is the same..
+```
+
+After creating the grid with a tilemap, you can update the grid using:
+```C#
+// create a grid
+PathFind.Grid grid = new PathFind.Grid(width, height, tilesmap);
+
+// change the grid here
+
+// update later
+grid.UpdateGrid (tilesmap);
 ```
