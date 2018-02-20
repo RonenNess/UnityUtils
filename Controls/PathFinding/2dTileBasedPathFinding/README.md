@@ -39,6 +39,10 @@ PathFind.Point _to = new PathFind.Point(10, 10);
 // get path
 // path will either be a list of Points (x, y), or an empty list if no path is found.
 List<PathFind.Point> path = PathFind.Pathfinding.FindPath(grid, _from, _to);
+
+// for Manhattan distance
+List<PathFind.Point> path = PathFind.Pathfinding.FindPath(grid, _from, _to, Pathfinding.DistanceType.Manhattan);
+
 ```
 
 If you don't care about price of tiles (eg tiles can only be walkable or blocking), you can also pass a 2d array of *booleans* when creating the grid:
@@ -59,7 +63,7 @@ After creating the grid with a tilemap, you can update the grid using:
 // create a grid
 PathFind.Grid grid = new PathFind.Grid(width, height, tilesmap);
 
-// change the grid here
+// change the tilemap here
 
 // update later
 grid.UpdateGrid (tilesmap);
