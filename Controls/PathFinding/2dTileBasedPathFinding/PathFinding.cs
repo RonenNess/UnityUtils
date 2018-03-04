@@ -19,16 +19,21 @@ namespace NesScripts.Controls.PathFind
     /// </summary>
     public class Pathfinding
     {
+        /// <summary>
+        /// Different ways to calculate path distance.
+        /// </summary>
 		public enum DistanceType
 		{
+            /// <summary>
+            /// The "ordinary" straight-line distance between two points.
+            /// </summary>
 			Euclidean,
-			Manhattan
-		}
 
-		/// <summary>
-		/// The type of distance.
-		/// </summary>
-		public static DistanceType DISTANCE_TYPE;
+            /// <summary>
+            /// Distance without diagonals, only horizontal and/or vertical path lines.
+            /// </summary>
+			Manhattan
+        }
 
         /// <summary>
         /// Find a path between two points.
@@ -41,10 +46,8 @@ namespace NesScripts.Controls.PathFind
         /// <returns>List of points that represent the path to walk.</returns>
 		public static List<Point> FindPath(Grid grid, Point startPos, Point targetPos, DistanceType distance = DistanceType.Euclidean, bool ignorePrices = false)
         {
-			DISTANCE_TYPE = distance;
-
             // find path
-            List<Node> nodes_path = _ImpFindPath(grid, startPos, targetPos, ignorePrices);
+            List<Node> nodes_path = _ImpFindPath(grid, startPos, targetPos, distance, ignorePrices);
 
             // convert to a list of points and return
             List<Point> ret = new List<Point>();
@@ -64,9 +67,10 @@ namespace NesScripts.Controls.PathFind
         /// <param name="grid">Grid to search.</param>
         /// <param name="startPos">Starting position.</param>
         /// <param name="targetPos">Ending position.</param>
+        /// <param name="distance">The type of distance, Euclidean or Manhattan.</param>
         /// <param name="ignorePrices">If true, will ignore tile price (how much it "cost" to walk on).</param>
         /// <returns>List of grid nodes that represent the path to walk.</returns>
-        private static List<Node> _ImpFindPath(Grid grid, Point startPos, Point targetPos, bool ignorePrices = false)
+        private static List<Node> _ImpFindPath(Grid grid, Point startPos, Point targetPos, DistanceType distance = DistanceType.Euclidean, bool ignorePrices = false)
         {
             Node startNode = grid.nodes[startPos.x, startPos.y];
             Node targetNode = grid.nodes[targetPos.x, targetPos.y];
@@ -94,7 +98,7 @@ namespace NesScripts.Controls.PathFind
                     return RetracePath(grid, startNode, targetNode);
                 }
 
-                foreach (Node neighbour in grid.GetNeighbours(currentNode, DISTANCE_TYPE))
+                foreach (Node neighbour in grid.GetNeighbours(currentNode, distance))
                 {
                     if (!neighbour.walkable || closedSet.Contains(neighbour))
                     {
@@ -148,12 +152,9 @@ namespace NesScripts.Controls.PathFind
         {
             int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
             int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
-
-            if (dstX > dstY)
-                return 14 * dstY + 10 * (dstX - dstY);
-            return 14 * dstX + 10 * (dstY - dstX);
-
-//			return dstX + dstY;
+            return (dstX > dstY) ? 
+                14 * dstY + 10 * (dstX - dstY) :
+                14 * dstX + 10 * (dstY - dstX);
         }
     }
 
