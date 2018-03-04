@@ -11,6 +11,7 @@ This code is mostly based on the code from [this tutorial](https://www.youtube.c
 - Separated into files, some docs, minor refactoring.
 - Added a more simple, straight-forward API.
 - Added support in tile prices, eg tiles that cost more to walk on.
+- Added support for Manhattan distance.
 
 But overall most of the work is done by [Sebastian Lague](https://www.youtube.com/channel/UCmtyQOKKmrMVaKuRXz02jbQ).
 
@@ -29,7 +30,7 @@ float[,] tilesmap = new float[width, height];
 // use 0.0f for blocking tiles.
 
 // create a grid
-PathFind.Grid grid = new PathFind.Grid(width, height, tilesmap);
+PathFind.Grid grid = new PathFind.Grid(tilesmap);
 
 // create source and target points
 PathFind.Point _from = new PathFind.Point(1, 1);
@@ -38,6 +39,10 @@ PathFind.Point _to = new PathFind.Point(10, 10);
 // get path
 // path will either be a list of Points (x, y), or an empty list if no path is found.
 List<PathFind.Point> path = PathFind.Pathfinding.FindPath(grid, _from, _to);
+
+// for Manhattan distance
+List<PathFind.Point> path = PathFind.Pathfinding.FindPath(grid, _from, _to, Pathfinding.DistanceType.Manhattan);
+
 ```
 
 If you don't care about price of tiles (eg tiles can only be walkable or blocking), you can also pass a 2d array of *booleans* when creating the grid:
@@ -48,7 +53,18 @@ bool[,] tilesmap = new bool[width, height];
 // true = walkable, false = blocking
 
 // create a grid
-PathFind.Grid grid = new PathFind.Grid(width, height, tilesmap);
+PathFind.Grid grid = new PathFind.Grid(tilesmap);
 
 // rest is the same..
+```
+
+After creating the grid with a tilemap, you can update the grid using:
+```C#
+// create a grid
+PathFind.Grid grid = new PathFind.Grid(tilesmap);
+
+// change the tilemap here
+
+// update later
+grid.UpdateGrid (tilesmap);
 ```
