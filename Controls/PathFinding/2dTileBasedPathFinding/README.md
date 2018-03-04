@@ -30,7 +30,7 @@ float[,] tilesmap = new float[width, height];
 // use 0.0f for blocking tiles.
 
 // create a grid
-PathFind.Grid grid = new PathFind.Grid(width, height, tilesmap);
+PathFind.Grid grid = new PathFind.Grid(tilesmap);
 
 // create source and target points
 PathFind.Point _from = new PathFind.Point(1, 1);
@@ -53,7 +53,7 @@ bool[,] tilesmap = new bool[width, height];
 // true = walkable, false = blocking
 
 // create a grid
-PathFind.Grid grid = new PathFind.Grid(width, height, tilesmap);
+PathFind.Grid grid = new PathFind.Grid(tilesmap);
 
 // rest is the same..
 ```
@@ -61,7 +61,7 @@ PathFind.Grid grid = new PathFind.Grid(width, height, tilesmap);
 After creating the grid with a tilemap, you can update the grid using:
 ```C#
 // create a grid
-PathFind.Grid grid = new PathFind.Grid(width, height, tilesmap);
+PathFind.Grid grid = new PathFind.Grid(tilesmap);
 
 // change the tilemap here
 

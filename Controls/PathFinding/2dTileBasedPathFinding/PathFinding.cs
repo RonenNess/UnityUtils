@@ -5,7 +5,6 @@
  * Author: Ronen Ness.
  * Since: 2016. 
 */
-using UnityEngine;
 using System.Collections.Generic;
 
 namespace NesScripts.Controls.PathFind
@@ -150,8 +149,8 @@ namespace NesScripts.Controls.PathFind
         /// <returns>Distance between nodes.</returns>
         private static int GetDistance(Node nodeA, Node nodeB)
         {
-            int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
-            int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
+            int dstX = System.Math.Abs(nodeA.gridX - nodeB.gridX);
+            int dstY = System.Math.Abs(nodeA.gridY - nodeB.gridY);
             return (dstX > dstY) ? 
                 14 * dstY + 10 * (dstX - dstY) :
                 14 * dstX + 10 * (dstY - dstX);
