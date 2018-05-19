@@ -23,6 +23,7 @@ The following is a list with all scripts found in this repo:
 - [Controls\SimpleFpsControls\FPSMouseLooking.cs](Controls/SimpleFpsControls)
 - [Controls\SimpleFpsControls\FPSWalker.cs](Controls/SimpleFpsControls)
 - [Graphics\Billboard\Billboard.cs](Graphics/Billboard)
+- [Graphics\TextureFan\TextureFan.cs](Graphics/TextureFan)
 - [Misc\ExMath\ExMath.cs](Misc/ExMath)
 - [TileMap3D\Tile.cs](TileMap3D)
 - [TileMap3D\TileMap.cs](TileMap3D)
