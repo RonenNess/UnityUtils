@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/**
+ * Implements a texture quad fan from a single quad, useful to represent semi-3d trees in old game graphics.
+ *   
+ * Author: Ronen Ness.
+ * Since: 2018. 
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +36,11 @@ namespace NesScripts.Graphics
 				// clone self
 				var newSide = Object.Instantiate(toClone);
 				Destroy (newSide.GetComponent<TextureFan> ());
+				
+				// if its first run, make sure rotation y starts with 0
+				if (i == 0) {
+					newSide.transform.rotation = Quaternion.identity;
+				}
 
 				// rotate it
 				newSide.transform.parent = transform;
