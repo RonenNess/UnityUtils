@@ -20,6 +20,11 @@ namespace NesScripts.Graphics
 		/// How many sides this textured fan should have.
 		/// </summary>
 		public int NumberOfSides = 2;
+		
+		/// <summary>
+		/// If true, will disable shadows from the extra fan sides.
+		/// </summary>
+		public bool DisableShadowsOnExtraSides = false;
 
 		// Use this for initialization
 		void Start () {
@@ -49,7 +54,8 @@ namespace NesScripts.Graphics
 				newSide.transform.localPosition = Vector3.zero;
 
 				// disable shadow casting
-				newSide.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+				if (DisableShadowsOnExtraSides)
+					newSide.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
 				// set this side as the next object to clone
 				toClone = newSide;
