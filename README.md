@@ -15,6 +15,7 @@ The following is a list with all scripts found in this repo:
 
 - [Controls\FollowObject\FollowObject.cs](Controls/FollowObject)
 - [Controls\GameEditor\FlyCameraController\FlyCameraController.cs](Controls/GameEditor/FlyCameraController)
+- [Controls\GameEditor\ObjectsPickAndPlacer\ObjectsPickAndPlacer.cs](Controls/GameEditor/ObjectsPickAndPlacer)
 - [Controls\GameEditor\ObjectsPlacer\ObjectsPlacer.cs](Controls/GameEditor/ObjectsPlacer)
 - [Controls\PathFinding\2dTileBasedPathFinding\Grid.cs](Controls/PathFinding/2dTileBasedPathFinding)
 - [Controls\PathFinding\2dTileBasedPathFinding\Node.cs](Controls/PathFinding/2dTileBasedPathFinding)
