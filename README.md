@@ -15,7 +15,6 @@ The following is a list with all scripts found in this repo:
 
 - [Controls\FollowObject\FollowObject.cs](Controls/FollowObject)
 - [Controls\GameEditor\FlyCameraController\FlyCameraController.cs](Controls/GameEditor/FlyCameraController)
-- [Controls\GameEditor\ObjectsPickAndPlacer\ObjectsPickAndPlacer.cs](Controls/GameEditor/ObjectsPickAndPlacer)
 - [Controls\GameEditor\ObjectsPlacer\ObjectsPlacer.cs](Controls/GameEditor/ObjectsPlacer)
 - [Controls\PathFinding\2dTileBasedPathFinding\Grid.cs](Controls/PathFinding/2dTileBasedPathFinding)
 - [Controls\PathFinding\2dTileBasedPathFinding\Node.cs](Controls/PathFinding/2dTileBasedPathFinding)
@@ -27,6 +26,7 @@ The following is a list with all scripts found in this repo:
 - [Graphics\RandomRotator\RandomRotator.cs](Graphics/RandomRotator)
 - [Graphics\TextureFan\TextureFan.cs](Graphics/TextureFan)
 - [Misc\ExMath\ExMath.cs](Misc/ExMath)
+- [Oldies\Controls\GameEditor\ObjectsPickAndPlacer\ObjectsPickAndPlacer.cs](Oldies/Controls/GameEditor/ObjectsPickAndPlacer)
 - [TileMap3D\Tile.cs](TileMap3D)
 - [TileMap3D\TileMap.cs](TileMap3D)
 - [TileMap3D\TilemapEditor.cs](TileMap3D)
