@@ -22,3 +22,7 @@ The right way to use them is like this:
                         +-- [Component] Camera
 
 ```
+
+# FPSRigidWalker
+
+Use this instead of the default FPSWalker if you want to use rigid bodies instead of a character controller.

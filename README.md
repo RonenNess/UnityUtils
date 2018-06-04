@@ -21,6 +21,7 @@ The following is a list with all scripts found in this repo:
 - [Controls\PathFinding\2dTileBasedPathFinding\PathFinding.cs](Controls/PathFinding/2dTileBasedPathFinding)
 - [Controls\PathFinding\2dTileBasedPathFinding\Point.cs](Controls/PathFinding/2dTileBasedPathFinding)
 - [Controls\SimpleFpsControls\FPSMouseLooking.cs](Controls/SimpleFpsControls)
+- [Controls\SimpleFpsControls\FPSRigidWalker.cs](Controls/SimpleFpsControls)
 - [Controls\SimpleFpsControls\FPSWalker.cs](Controls/SimpleFpsControls)
 - [Graphics\Billboard\Billboard.cs](Graphics/Billboard)
 - [Graphics\TextureFan\TextureFan.cs](Graphics/TextureFan)
