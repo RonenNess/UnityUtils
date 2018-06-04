@@ -20,11 +20,6 @@ namespace NesScripts.Graphics
 		/// How many sides this textured fan should have.
 		/// </summary>
 		public int NumberOfSides = 2;
-		
-		/// <summary>
-		/// If true, will disable shadows from the extra fan sides.
-		/// </summary>
-		public bool DisableShadowsOnExtraSides = false;
 
 		// Use this for initialization
 		void Start () {
@@ -36,30 +31,25 @@ namespace NesScripts.Graphics
 			GameObject toClone = gameObject;
 
 			// now clone based on number of leafs
-			for (int i = 0; i < NumberOfSides * 2 - 1; ++i) {
+			for (int i = 0; i < NumberOfSides * 2; ++i) {
 
 				// clone self
 				var newSide = Object.Instantiate(toClone);
 				Destroy (newSide.GetComponent<TextureFan> ());
-				
-				// if its first run, make sure rotation y starts with 0
-				if (i == 0) {
-					newSide.transform.rotation = Quaternion.identity;
-				}
 
 				// rotate it
 				newSide.transform.parent = transform;
-				newSide.transform.Rotate(new Vector3(0, 1, 0), (180 / NumberOfSides));
+				newSide.transform.localRotation = Quaternion.identity;
+				newSide.transform.Rotate(new Vector3(0, 1, 0), (180 / NumberOfSides) * i);
 				newSide.transform.localScale = Vector3.one;
 				newSide.transform.localPosition = Vector3.zero;
-
-				// disable shadow casting
-				if (DisableShadowsOnExtraSides)
-					newSide.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
 				// set this side as the next object to clone
 				toClone = newSide;
 			}
+
+			// remove original mesh renderer
+			Destroy(GetComponent<MeshRenderer>());
 		}
 		
 		// Update is called once per frame

@@ -60,6 +60,9 @@ namespace NesScripts.Controls.GameEditor
 		// If 0.0, from its top.
 		public float PivotY = 1f;
 
+		// if true, will adjust position Y while placing objects based on pivot.
+		public bool AdjustPositionFromPivotY = false;
+
 		/// <summary>
 		/// Start this instance.
 		/// </summary>
@@ -201,7 +204,8 @@ namespace NesScripts.Controls.GameEditor
                 }
 
                 // update the position of the object-in-hand, to make it show where you are going to place it
-				ObjectToPlace.transform.position = collisionPoint + new Vector3(0, -targetMaxExtentHeight + targetMaxExtentHeight * (PivotY * 2f), 0);
+				var extraY = AdjustPositionFromPivotY ? -targetMaxExtentHeight + targetMaxExtentHeight * (PivotY * 2f) : 0f;
+				ObjectToPlace.transform.position = collisionPoint + new Vector3(0, extraY, 0);
 				ObjectToPlace.transform.rotation = Quaternion.identity;
 
                 // if click, leave object where we placed it
