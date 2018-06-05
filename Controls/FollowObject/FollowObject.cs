@@ -16,29 +16,65 @@ namespace NesScripts.Controls
     /// </summary>
     public class FollowObject : MonoBehaviour
     {
-        // target to follow.
+        /// <summary>
+        /// Target to follow.
+        /// </summary>
         public GameObject Target;
 
-        // position offset from target.
+        /// <summary>
+        /// Position offset to keep from target.
+        /// </summary>
         public Vector3 PositionOffset = new Vector3(0, 0, 0);
 
-        // lookat offset from target.
+        /// <summary>
+        /// Lookat offset from target (will look at target position + this offset).
+        /// </summary>
         public Vector3 LookatOffset = new Vector3(0, 0, 0);
 
-        // if true, will rotate to lookat target (turn to false to disable rotation)
+        /// <summary>
+        /// If true, will rotate to lookat target (turn to false to disable rotation)
+        /// </summary>
         public bool ControlRotation = true;
 
-        // if true, will move to target position (turn to false to disable movement)
+        /// <summary>
+        /// If true, will move to target position (turn to false to disable movement)
+        /// </summary>
         public bool ControlPosition = true;
 
-        // if > 0.0f, will follow / lookat target with damping, eg smoothly
-        public float DampingTime = 0.25f;
+        /// <summary>
+        /// If value > 0f, will lerp toward target position with this factor as damping time.
+        /// </summary>
+        public float PositionDampingTime = 0.25f;
+
+        /// <summary>
+        /// If value > 0f, will lerp rotation to look at target with this factor as damping time.
+        /// </summary>
+        public float RotationDampingTime = 0.25f;
+
+        /// <summary>
+        /// If true, we will init offset and rotation from starting transform (will override PositionOffset).
+        /// </summary>
+        public bool SetOffsetFromTransform = true;
 
         // movement velocity for damping
         Vector3 moveVelocity = new Vector3(0, 0, 0);
 
-        // update the follower
-        void Update()
+        /// <summary>
+        /// Initialize controller.
+        /// </summary>
+        void Start()
+        {
+            // init offset and lookat offset from starting transform
+            if (SetOffsetFromTransform)
+            {
+                PositionOffset = transform.position - Target.transform.position;
+            }
+        }
+
+        /// <summary>
+        /// Follow target
+        /// </summary>
+        void FixedUpdate()
         {
             // control position
             if (ControlPosition)
@@ -47,7 +83,13 @@ namespace NesScripts.Controls
 				var targetPos = Target.transform.position + PositionOffset;
 
                 // move to target
-                transform.position = DampingTime > 0 ? Vector3.SmoothDamp(transform.position, targetPos, ref moveVelocity, DampingTime) : targetPos;
+                transform.position = PositionDampingTime > 0 ? 
+                    Vector3.SmoothDamp(transform.position, targetPos, ref moveVelocity, PositionDampingTime) : 
+                    targetPos;
+
+                // to prevent shaking
+                if ((transform.position - targetPos).magnitude < 0.05f)
+                    transform.position = targetPos;
             }
 
             // control rotation
@@ -57,7 +99,9 @@ namespace NesScripts.Controls
 				var targetRotation =  Quaternion.LookRotation((Target.transform.position + LookatOffset) - transform.position );
 
                 // rotate to look at target
-                transform.rotation = DampingTime > 0 ? Quaternion.Slerp(transform.rotation, targetRotation, (1f / DampingTime) * Time.deltaTime) : targetRotation;
+                transform.rotation = RotationDampingTime > 0 ? 
+                    Quaternion.Slerp(transform.rotation, targetRotation, (1f / RotationDampingTime) * Time.deltaTime) : 
+                    targetRotation;
             }
         }
     }

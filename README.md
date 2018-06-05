@@ -24,6 +24,7 @@ The following is a list with all scripts found in this repo:
 - [Controls\SimpleFpsControls\FPSRigidWalker.cs](Controls/SimpleFpsControls)
 - [Controls\SimpleFpsControls\FPSWalker.cs](Controls/SimpleFpsControls)
 - [Graphics\Billboard\Billboard.cs](Graphics/Billboard)
+- [Graphics\RecalcTextureTile\RecalcTextureTile.cs](Graphics/RecalcTextureTile)
 - [Graphics\TextureFan\TextureFan.cs](Graphics/TextureFan)
 - [Misc\ExMath\ExMath.cs](Misc/ExMath)
 - [Oldies\Controls\GameEditor\ObjectsPickAndPlacer\ObjectsPickAndPlacer.cs](Oldies/Controls/GameEditor/ObjectsPickAndPlacer)
