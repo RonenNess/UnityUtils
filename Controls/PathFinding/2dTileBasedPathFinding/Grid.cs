@@ -131,60 +131,68 @@ namespace NesScripts.Controls.PathFind
         /// </summary>
         /// <param name="node">Node to get neighbors for.</param>
         /// <returns>List of node neighbors.</returns>
-        public List<Node> GetNeighbours(Node node, Pathfinding.DistanceType distanceType)
+        public System.Collections.IEnumerable GetNeighbours(Node node, Pathfinding.DistanceType distanceType)
         {
-            List<Node> neighbours = new List<Node>();
-
 			int x = 0, y = 0;
+            switch (distanceType)
+            {
+                case Pathfinding.DistanceType.Manhattan:
+                    y = 0;
+                    for (x = -1; x <= 1; ++x)
+                    {
+                        var neighbor = AddNodeNeighbour(x, y, node);
+                        if (neighbor != null)
+                            yield return neighbor;
+                    }
 
-			switch (distanceType) {
-			case Pathfinding.DistanceType.Manhattan:
-				y = 0;
-				for (x = -1; x <= 1; ++x) {
-					AddNodeNeighbour (x, y, node, neighbours);
-				}
+                    x = 0;
+                    for (y = -1; y <= 1; ++y)
+                    {
+                        var neighbor = AddNodeNeighbour(x, y, node);
+                        if (neighbor != null)
+                            yield return neighbor;
+                    }
+                    break;
 
-				x = 0;
-				for (y = -1; y <= 1; ++y) {
-					AddNodeNeighbour (x, y, node, neighbours);
-				}
-				break;
-
-			case Pathfinding.DistanceType.Euclidean:
-				for (x = -1; x <= 1; x++) {
-					for (y = -1; y <= 1; y++) {
-						AddNodeNeighbour (x, y, node, neighbours);
-					}
-				}
-				break;
-			}
-
-            return neighbours;
+                case Pathfinding.DistanceType.Euclidean:
+                    for (x = -1; x <= 1; x++)
+                    {
+                        for (y = -1; y <= 1; y++)
+                        {
+                            var neighbor = AddNodeNeighbour(x, y, node);
+                            if (neighbor != null)
+                                yield return neighbor;
+                        }
+                    }
+                    break;
+            }
         }
 
-		/// <summary>
-		/// Adds the node neighbour.
-		/// </summary>
-		/// <returns><c>true</c>, if node neighbour was added, <c>false</c> otherwise.</returns>
-		/// <param name="x">The x coordinate.</param>
-		/// <param name="y">The y coordinate.</param>
-		/// <param name="node">Node.</param>
-		/// <param name="neighbours">Neighbours.</param>
-		private bool AddNodeNeighbour (int x, int y, Node node, List<Node> neighbours) {
-			if (x == 0 && y == 0)
-				return false;
+        /// <summary>
+        /// Adds the node neighbour.
+        /// </summary>
+        /// <returns><c>true</c>, if node neighbour was added, <c>false</c> otherwise.</returns>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        /// <param name="node">Node.</param>
+        /// <param name="neighbours">Neighbours.</param>
+        Node AddNodeNeighbour(int x, int y, Node node)
+        {
+            if (x == 0 && y == 0)
+            {
+                return null;
+            }
 
-			int checkX = node.gridX + x;
-			int checkY = node.gridY + y;
+            int checkX = node.gridX + x;
+            int checkY = node.gridY + y;
 
-			if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
-			{
-				neighbours.Add(nodes[checkX, checkY]);
-				return true;
-			}
+            if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+            {
+                return nodes[checkX, checkY];
+            }
 
-			return false;
-		}
+            return null;
+        }
     }
 
 }
