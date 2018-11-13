@@ -41,7 +41,6 @@ namespace NesScripts.Controls.PathFind
                 for (int y = 0; y < gridSizeY; y++)
                 {
                     nodes[x, y] = new Node(tiles_costs[x, y], x, y);
-
                 }
             }
         }

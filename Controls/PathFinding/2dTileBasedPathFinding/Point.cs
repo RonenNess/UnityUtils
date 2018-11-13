@@ -11,22 +11,13 @@ namespace NesScripts.Controls.PathFind
     /// <summary>
     /// A 2d point on the grid
     /// </summary>
-    public class Point
+    public struct Point
     {
         // point X
         public int x;
 
         // point Y
         public int y;
-
-        /// <summary>
-        /// Init the point with zeros.
-        /// </summary>
-        public Point()
-        {
-            x = 0;
-            y = 0;
-        }
 
         /// <summary>
         /// Init the point with values.
