@@ -40,7 +40,7 @@ namespace NesScripts.Controls.PathFind
             }
 
             // create a grid
-            PathFind.Grid grid = new PathFind.Grid(tilesmap);
+            PathFind.GridI grid = new PathFind.SquareGrid(tilesmap);
 
             // create source and target points
             PathFind.Point _from = new PathFind.Point(1, 1);
